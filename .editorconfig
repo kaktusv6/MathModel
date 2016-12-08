@@ -1,0 +1,13 @@
+root = true
+
+[*.{cpp,h}]
+indent_style = tab
+tab_with = 4
+charset = utf-8
+trim_trailing_whitespace = true
+
+[*.{js,jade,scss}]
+indent_style = tab
+tab_with = 4
+charset = utf-8
+trim_trailing_whitespace = true

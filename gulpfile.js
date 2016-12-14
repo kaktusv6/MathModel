@@ -61,7 +61,7 @@ gulp.task('watch',function () {
 	gulp.watch('dist/js/*.js', ['js'])
 
 	// watchers for jade files
-	gulp.watch('dist/jade/headers/*.jade', ['jade']);
+	gulp.watch('dist/jade/**/*.jade', ['jade']);
 	gulp.watch('dist/jade/*.jade', ['jade'])
 });
 

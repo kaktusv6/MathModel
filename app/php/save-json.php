@@ -15,7 +15,7 @@
 	fwrite($fp, json_encode($_GET));
 	fclose($fp);
 
-	// header("Location: chat.html")
+	header("Location: ../page-two.html")
 	// получаем строку через get запрос
 	// создаем .json файл который содержит переданную строку
 	// переходим на следующую страницу

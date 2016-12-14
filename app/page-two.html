@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta http-equive="X-UA-Compatible" content="IE=edge"/>
+    <title>Эмуляция распостранения вируса | Ввод городов</title>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="css/index.css"/>
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/classCity.js"></script>
+  </head>
+  <body class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 title">
+        <h1>Задайте параметры i-ого города</h1>
+      </div>
+    </div>
+    <div class="row">
+      <form action="save-json.php" method="get" class="col-md-6 col-md-offset-3 form-inline row">
+        <div class="form-group col-md-12">
+          <label>Название города</label>
+          <input type="text" placeholder="6 .. 24" name="nameCity" id="name-city-input" class="form-control input-model"/>
+        </div>
+        <div class="form-group col-md-12">
+          <label for="cities-input">Численость населения</label>
+          <select name="type-population-city" id="type-city-input" class="form-control input-model">
+            <option>Мегаполис</option>
+          </select>
+        </div>
+        <div class="form-group col-md-12">
+          <label for="mounth-input">Процент заболевших людей (%)</label>
+          <input type="text" placeholder="1 .. 100" name="infected" id="infected-input" class="form-control input-model"/>
+        </div>
+        <div class="form-group col-md-12">
+          <label for="price-input">Процент привитых людей (%)</label>
+          <input type="text" placeholder="1 .. 100" name="vacinated" id="vacinated-input" class="form-control input-model"/>
+        </div>
+        <div class="form-group col-md-12">
+          <label for="fund-input">Насыщеность транспортного сообщения</label>
+          <input type="text" placeholder="1 .. 100" name="transport" id="transport-input" class="form-control input-model"/>
+        </div>
+        <button type="submit" class="btn btn-success col-md-2 col-md-offset-5 but-submit">Ввод</button>
+      </form>
+    </div>
+    <script type="text/javascript" src="js/page-two.js"></script>
+  </body>
+</html>

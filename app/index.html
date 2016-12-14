@@ -17,18 +17,18 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6 col-md-offset-3 form-inline row">
+      <form action="save-json.php" method="get" class="col-md-6 col-md-offset-3 form-inline row">
         <div class="form-group col-md-12">
-          <label for="period-input">Период моделирования</label>
-          <input type="text" placeholder="6 .. 24" id="period-input" class="form-control input-model"/>
+          <label>Период моделирования</label>
+          <input type="text" placeholder="6 .. 24" name="period" id="period-input" class="form-control input-model"/>
         </div>
         <div class="form-group col-md-12">
           <label for="cities-input">Кол-во городов</label>
-          <input type="text" placeholder="5 .. 10" id="cities-input" class="form-control input-model"/>
+          <input type="text" placeholder="5 .. 10" name="countCities" id="cities-input" class="form-control input-model"/>
         </div>
         <div class="form-group col-md-12">
           <label for="mounth-input">Месяц начала моделирования</label>
-          <select id="mounth-input" class="form-control input-model">
+          <select name="startMonth" id="mounth-input" class="form-control input-model">
             <option>Январь</option>
             <option>Февраль</option>
             <option>Март</option>
@@ -45,14 +45,14 @@
         </div>
         <div class="form-group col-md-12">
           <label for="price-input">Стоимость одной прививки</label>
-          <input type="text" placeholder="в у.е." id="price-input" class="form-control input-model"/>
+          <input type="text" placeholder="в у.е." name="price" id="price-input" class="form-control input-model"/>
         </div>
         <div class="form-group col-md-12">
           <label for="fund-input">Денежный фонд страны на прививки</label>
-          <input type="text" placeholder="в у.е." id="fund-input" class="form-control input-model"/>
+          <input type="text" placeholder="в у.е." name="fund" id="fund-input" class="form-control input-model"/>
         </div>
         <button type="submit" class="btn btn-success col-md-2 col-md-offset-5 but-submit">Ввод</button>
-      </div>
+      </form>
     </div>
     <script type="text/javascript" src="js/index.js"></script>
   </body>

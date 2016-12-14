@@ -14,7 +14,7 @@ gulp.task('connect', function() {
 });
 
 gulp.task('jade', function() {
-	gulp.src('dist/jade/index.jade')
+	gulp.src('dist/jade/*.jade')
 	.pipe(jade({
 		pretty: true
 	}))

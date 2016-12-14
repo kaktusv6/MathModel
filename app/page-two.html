@@ -13,36 +13,42 @@
   </head>
   <body class="container-fluid">
     <div class="row">
-      <div class="col-md-8 col-md-offset-2 title">
-        <h1>Задайте параметры i-ого города</h1>
+      <div class="col-md-8 col-md-offset-2">
+        <h1 class="title">Задайте параметры 1-ого города</h1>
       </div>
     </div>
     <div class="row">
-      <form action="save-json.php" method="get" class="col-md-6 col-md-offset-3 form-inline row">
+      <div class="col-md-6 col-md-offset-3 form-inline row">
         <div class="form-group col-md-12">
-          <label>Название города</label>
-          <input type="text" placeholder="6 .. 24" name="nameCity" id="name-city-input" class="form-control input-model"/>
+          <label for="nameCity">Название города</label>
+          <input type="text" placeholder="Введите название города" name="nameCity" id="name-city-input" class="form-control input-model"/>
         </div>
         <div class="form-group col-md-12">
-          <label for="cities-input">Численость населения</label>
-          <select name="type-population-city" id="type-city-input" class="form-control input-model">
+          <label for="type-city">Тип города</label>
+          <select name="type-city" id="type-city-input" class="form-control input-model">
             <option>Мегаполис</option>
+            <option>Средний город</option>
+            <option>ПГТ</option>
           </select>
         </div>
         <div class="form-group col-md-12">
-          <label for="mounth-input">Процент заболевших людей (%)</label>
-          <input type="text" placeholder="1 .. 100" name="infected" id="infected-input" class="form-control input-model"/>
+          <label for="population-city">Численость насиления</label>
+          <input type="text" placeholder="&lt; 1000000" name="population-city" id="population-input" class="form-control input-model"/>
         </div>
         <div class="form-group col-md-12">
-          <label for="price-input">Процент привитых людей (%)</label>
-          <input type="text" placeholder="1 .. 100" name="vacinated" id="vacinated-input" class="form-control input-model"/>
+          <label for="infected-city">Процент заболевших людей (%)</label>
+          <input type="text" placeholder="1 .. 100" name="infected-city" id="infected-input" class="form-control input-model"/>
         </div>
         <div class="form-group col-md-12">
-          <label for="fund-input">Насыщеность транспортного сообщения</label>
-          <input type="text" placeholder="1 .. 100" name="transport" id="transport-input" class="form-control input-model"/>
+          <label for="vacinated-city">Процент привитых людей (%)</label>
+          <input type="text" placeholder="1 .. 100" name="vacinated-city" id="vacinated-input" class="form-control input-model"/>
         </div>
-        <button type="submit" class="btn btn-success col-md-2 col-md-offset-5 but-submit">Ввод</button>
-      </form>
+        <div class="form-group col-md-12">
+          <label for="transport-city">Насыщеность транспортного сообщения</label>
+          <input type="text" placeholder="1 .. 100" name="transport-city" id="transport-input" class="form-control input-model"/>
+        </div>
+        <button class="btn btn-success col-md-2 col-md-offset-5 but-submit">Ввод</button>
+      </div>
     </div>
     <script type="text/javascript" src="js/page-two.js"></script>
   </body>

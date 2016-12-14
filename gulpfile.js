@@ -1,14 +1,15 @@
 var gulp = require('gulp'),
 	livereload = require('gulp-livereload'),
-	connect = require('gulp-connect'),
+	connect = require('gulp-connect-php'),
 	sass = require('gulp-sass'),
 	jade = require('gulp-jade'),
 	csscomb = require('gulp-csscomb');
 
 gulp.task('connect', function() {
 	connect.server({
-		root: '',
-		livereload: true
+		base: '.',
+		hostname: 'localhost',
+		port: '8080'
 	});
 });
 
@@ -17,16 +18,16 @@ gulp.task('jade', function() {
 	.pipe(jade({
 		pretty: true
 	}))
-	.pipe(gulp.dest('app'))
-	.pipe(connect.reload());
+	.pipe(gulp.dest('app'));
+	//.pipe(connect.reload());
 });
 
 gulp.task('scss', function () {
 	gulp.src('dist/scss/index.scss')
     .pipe(sass.sync().on('error', sass.logError))
 	.pipe(csscomb())
-    .pipe(gulp.dest('app/css'))
-	.pipe(connect.reload());
+    .pipe(gulp.dest('app/css'));
+//	.pipe(connect.reload());
 });
 
 gulp.task('css', function () {
@@ -35,13 +36,13 @@ gulp.task('css', function () {
 
 gulp.task('js', function () {
 	gulp.src('dist/js/*.js')
-	.pipe(gulp.dest('app/js'))
-	.pipe(connect.reload());
+	.pipe(gulp.dest('app/js'));
+	//.pipe(connect.reload());
 });
 
 gulp.task('reload', function () {
-	gulp.src('app/**')
-	.pipe(connect.reload());
+	gulp.src('app/**');
+	//.pipe(connect.reload());
 });
 
 // task for watch project files

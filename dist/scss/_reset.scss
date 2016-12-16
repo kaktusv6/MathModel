@@ -1,0 +1,78 @@
+$default-fonts: sans-serif, Arial;
+@mixin font($font, $size) {
+	font: {
+		family: $font, $default-fonts;
+		size: $size;
+	}
+}
+@mixin clear-fix {
+	&::after, &::before {
+		display: table;
+		content: "";
+	}
+	&::after{
+		clear: both;
+	}
+}
+@mixin font-placeholder($font, $size) {
+  &::-webkit-input-placeholder{
+	font: {
+	  size: $size;
+	  family: $font, $default-fonts;
+	}
+  }
+  &::-moz-input-placeholder{
+	font: {
+	  size: $size;
+	  family: $font, $default-fonts;
+	}
+  }
+  &::input-placeholder{
+	font: {
+	  size: $size;
+	  family: $font, $default-fonts;
+	}
+  }
+}
+@mixin color-placeholder($color) {
+  &::-webkit-input-placeholder{
+	color: $color;
+  }
+  &::-moz-input-placeholder{
+	color: $color;
+  }
+  &::input-placeholder{
+	color: $color;
+  }
+}
+@mixin justify-one-line-text{
+	&::after{
+		content: "";
+		font-size: 0px;
+		display: inline-block;
+		width: 100%;
+		height: 0px;
+	}
+}
+
+*{ font-weight: normal; }
+html,
+body {
+	height: 100%;
+	width: 100%;
+}
+:link,:visited { text-decoration:none; color: inherit; }
+
+ul,ol { list-style:none }
+
+h1,h2,h3,h4,h5,h6,pre,code { font-size:1em; }
+
+ul,ol,li,h1,h2,h3,h4,h5,h6,hr,pre,form,body,html,p,button,blockquote,fieldset,input
+{ margin:0; padding:0 }
+a {cursor: pointer;}
+a img,:link img,:visited img { border:none;}
+input:focus, button:focus { outline: none; }
+address { font-style:normal }
+button { cursor: pointer; border: none; background: transparent; }
+hr { width: 938px; }
+textarea { resize: none; }

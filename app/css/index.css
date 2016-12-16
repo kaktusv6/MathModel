@@ -1,7 +1,152 @@
+* {
+    font-weight: normal;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+:link, :visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6, pre, code {
+    font-size: 1em;
+}
+
+ul, ol, li, h1, h2, h3, h4, h5, h6, hr, pre, form, body, html, p, button, blockquote, fieldset, input {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    cursor: pointer;
+}
+
+a img, :link img, :visited img {
+    border: none;
+}
+
+input:focus, button:focus {
+    outline: none;
+}
+
+address {
+    font-style: normal;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+hr {
+    width: 938px;
+}
+
+textarea {
+    resize: none;
+}
+
 .title {
     text-align: center;
 }
 
 .input-model {
     float: right;
+}
+
+.wrapper {
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
+.wrapper::after, .wrapper::before {
+    display: table;
+    content: '';
+}
+.wrapper::after {
+    clear: both;
+}
+
+.chrats {
+    width: 1000px;
+    height: auto;
+    float: left;
+}
+.chrats::after, .chrats::before {
+    display: table;
+    content: '';
+}
+.chrats::after {
+    clear: both;
+}
+
+.pie-chart {
+    width: 200px;
+    height: 200px;
+    float: left;
+}
+
+.menu {
+    width: 200px;
+    float: right;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.legend {
+    text-align: left;
+    margin-bottom: 30px;
+}
+.legend__item {
+    position: relative;
+    padding-left: 15px;
+}
+.legend__item span {
+    font-size: 12px;
+}
+.legend__item:nth-child(1) .color-legend {
+    background-color: #36c;
+}
+.legend__item:nth-child(2) .color-legend {
+    background-color: #dc3912;
+}
+.legend__item:nth-child(3) .color-legend {
+    background-color: #f90;
+}
+
+.color-legend {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.form-vacinated {
+    margin-bottom: 60px;
+}
+
+.info-fund {
+    display: block;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+#select-city {
+    margin-bottom: 10px;
+}
+
+.input-count-vacinated {
+    margin-bottom: 10px;
 }

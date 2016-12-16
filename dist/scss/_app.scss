@@ -1,0 +1,73 @@
+.wrapper {
+	width: 1200px;
+	height: auto;
+	margin: 0 auto;
+	@include clear-fix;
+}
+.chrats {
+	width: 1000px;
+	height: auto;
+	float: left;
+	@include clear-fix;
+}
+$size-chart: 200px;
+.pie-chart {
+	width: $size-chart;
+	height: $size-chart;
+	float: left;
+}
+.menu {
+	width: 200px;
+	float: right;
+	text-align: center;
+	padding-top: 10px;
+}
+.legend {
+	text-align: left;
+	margin-bottom: 30px;
+	&__item {
+		position: relative;
+		padding-left: 15px;
+		span {
+			font-size: 12px;
+		}
+		&:nth-child(1) {
+			.color-legend {
+				background-color: #3366CC;
+			}
+		}
+		&:nth-child(2) {
+			.color-legend {
+				background-color: #DC3912;
+			}
+		}
+		&:nth-child(3) {
+			.color-legend {
+				background-color: #FF9900;
+			}
+		}
+	}
+}
+.color-legend {
+	position: absolute;
+	top: 5px;
+	left: 0;
+	display: block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+}
+.form-vacinated {
+	margin-bottom: 60px;
+}
+.info-fund {
+	display: block;
+	text-decoration: none;
+	margin-bottom: 10px;
+}
+#select-city {
+	margin-bottom: 10px;
+}
+.input-count-vacinated {
+	margin-bottom: 10px;
+}

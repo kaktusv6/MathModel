@@ -57,10 +57,17 @@ textarea {
 
 .title {
     text-align: center;
+    font-size: 34px;
+    margin-bottom: 30px;
 }
 
 .input-model {
     float: right;
+    margin-bottom: 5px;
+}
+
+.input-form label {
+    padding-top: 8px;
 }
 
 .wrapper {

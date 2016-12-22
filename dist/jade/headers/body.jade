@@ -3,13 +3,13 @@
 		h1 Задайте параметры
 .row
 	form(action="php/save-json.php" method="get").col-md-6.col-md-offset-3.form-inline.row
-		.form-group.col-md-12
+		.form-group.col-md-12.input-form
 			label Период моделирования
 			input(type="text" placeholder="6 .. 24" name="period").form-control.input-model#period-input
-		.form-group.col-md-12
+		.form-group.col-md-12.input-form
 			label(for="cities-input") Кол-во городов
 			input(type="text" placeholder="5 .. 10" name="countCities").form-control.input-model#cities-input
-		.form-group.col-md-12
+		.form-group.col-md-12.input-form
 			label(for="mounth-input") Месяц начала моделирования
 			select(name="startMonth").form-control.input-model#mounth-input
 				option Январь
@@ -24,10 +24,10 @@
 				option Октябрь
 				option Ноябрь
 				option Декабрь
-		.form-group.col-md-12
+		.form-group.col-md-12.input-form
 			label(for="price-input") Стоимость одной прививки
 			input(type="text" placeholder="в у.е." name="price").form-control.input-model#price-input
-		.form-group.col-md-12
+		.form-group.col-md-12.input-form
 			label(for="fund-input") Денежный фонд страны на прививки
 			input(type="text" placeholder="в у.е." name="fund").form-control.input-model#fund-input
 		button(type="submit").btn.btn-success.col-md-2.col-md-offset-5.but-submit Ввод

@@ -3,25 +3,25 @@
 		h1.title Задайте параметры 1-ого города
 .row
 	.col-md-6.col-md-offset-3.form-inline.row
-		.form-group.col-md-12
+		.form-group.col-md-12.input-form
 			label(for="nameCity") Название города
 			input(type="text" placeholder="Введите название города" name="nameCity").form-control.input-model#name-city-input
-		.form-group.col-md-12
+		.form-group.col-md-12.input-form
 			label(for="type-city") Тип города
 			select(name="type-city").form-control.input-model#type-city-input
 				option Мегаполис
 				option Средний город
 				option ПГТ
-		.form-group.col-md-12
+		.form-group.col-md-12.input-form
 			label(for="population-city") Численость насиления
 			input(type="text" placeholder="< 1000000" name="population-city").form-control.input-model#population-input
-		.form-group.col-md-12
+		.form-group.col-md-12.input-form
 			label(for="infected-city") Процент заболевших людей (%)
 			input(type="text" placeholder="1 .. 100" name="infected-city").form-control.input-model#infected-input
-		.form-group.col-md-12
+		.form-group.col-md-12.input-form
 			label(for="vacinated-city") Процент привитых людей (%)
 			input(type="text" placeholder="1 .. 100" name="vacinated-city").form-control.input-model#vacinated-input
-		.form-group.col-md-12
+		.form-group.col-md-12.input-form
 			label(for="transport-city") Насыщеность транспортного сообщения
 			input(type="text" placeholder="1 .. 100" name="transport-city").form-control.input-model#transport-input
 		button.btn.btn-success.col-md-2.col-md-offset-5.but-submit Ввод

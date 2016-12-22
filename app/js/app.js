@@ -48,6 +48,8 @@ function drawChart() {
         chart.draw(tables[i], options);
         charts.push(chart);
     }
+
+    $('.fund').html(objModel.fund);
 }
 
 // метод для перерисовки диаграм
@@ -83,6 +85,7 @@ function updateCharts() {
         chart.draw(tables[i], options);
         charts.push(chart);
     }
+    $('.fund').html(objModel.fund);
 }
 
 // запрос на данные из json файла

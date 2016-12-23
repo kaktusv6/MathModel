@@ -1,6 +1,5 @@
 var objModel = {}, // объект который хранить начальные данные. Данные берутся из cities.json
-    charts = new Array(), // массив объектов для работы с диаграммами
-    cities; // массив городов где будут изменятся значения городов во время работы приложения
+    charts = new Array(); // массив объектов для работы с диаграммами
 
 google.charts.load('current', {'packages':['corechart']});
 
@@ -12,9 +11,7 @@ function drawChart() {
     var tables = new Array(),
         countCities = Number.parseInt(objModel.countCities);
 
-    cities = objModel.cities;
-
-    for (let city of cities) {
+    for (let city of objModel.cities) {
         var table = new google.visualization.DataTable();
         
         table.addColumn('string', 'Тип лбдей');
@@ -41,24 +38,25 @@ function drawChart() {
             option = document.createElement('option');
 
         // Добавление названий городов в select
-        option.text = cities[i].name;
+        option.text = objModel.cities[i].name;
         select.add(option);
 
-        options.title = cities[i].name;
+        options.title = objModel.cities[i].name;
         chart.draw(tables[i], options);
         charts.push(chart);
     }
 
     $('.fund').html(objModel.fund);
+    $('.month').html(objModel.startMonth);
 }
 
 // метод для перерисовки диаграм
 // новые данные берутся из массива cities
 function updateCharts() {
     var tables = new Array(),
-        countCities = cities.length;
+        countCities = objModel.cities.length;
 
-    for (let city of cities) {
+    for (let city of objModel.cities) {
         var table = new google.visualization.DataTable();
         
         table.addColumn('string', 'Тип лбдей');
@@ -81,7 +79,7 @@ function updateCharts() {
 
     for (var i = 0; i < countCities; i++) {
         var chart = new google.visualization.PieChart(pieCharts[i]);
-        options.title = cities[i].name;
+        options.title = objModel.cities[i].name;
         chart.draw(tables[i], options);
         charts.push(chart);
     }

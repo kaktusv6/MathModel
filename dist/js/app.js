@@ -133,7 +133,7 @@ function simulationStep() {
     }
     for (var i = 0; i < objModel.cities.length; i++) {
       let t = weeks < 13 || weeks > 32 ? 0.9 : 0.1;
-      let e = Math.random(objModel.cities[i].sSaturation*t*objModel.cities[i].infected/objModel.cities[i].population);
+      let e = Math.random(0,objModel.cities[i].sSaturation*t*objModel.cities[i].infected/objModel.cities[i].population);
       objModel.fund+=(objModel.cities[i].population-objModel.cities[i].infected)*objModel.tax;
       objModel.fund-=objModel.cities[i].infected*objModel.cashPatient;
       let getIll;

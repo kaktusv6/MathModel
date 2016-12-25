@@ -8,8 +8,11 @@ class City {
 		this.infected = this.population/100 * pInfected;
 		this.vacinated = this.population/100 * pVacinated;
 		this.tSaturation = tSaturation*1;
-		this.oneWeek = 0;
-		this.twoWeeks = 0;
-		this.threeWeeks = 0;
+		this.cure1 = 0;
+		this.cure2 = 0;
+		this.cure3 = 0;
+		this.immune1 = 0;
+		this.immune2 = 0;
+		this.immune3 = 0;
 	}
 }

@@ -18,6 +18,7 @@ var weeks;
 var cweek;
 
 window.onload = function() {
+  console.log(objModel.cities);
   for (var i = 0; i < objModel.cities.length; i++) {
     objModel.cities[i].cure3 = objModel.cities[i].infected;
   }
@@ -34,7 +35,7 @@ window.onload = function() {
 // запускается когда сайт полностью прогрузился
 function drawChart() {
     var tables = new Array(),
-        countCities = Number.parseInt(objModel.countCities);
+        countCities = objModel.countCities;
 
     for (let city of objModel.cities) {
         var table = new google.visualization.DataTable();
@@ -42,9 +43,9 @@ function drawChart() {
         table.addColumn('string', 'Тип людей');
         table.addColumn('number', 'Кол-во');
         table.addRows([
-            ['Обычные люди', Number.parseInt(city.population) - Number.parseInt(city.infected) - Number.parseInt(city.vacinated)],
-            ['Зараженные люди', Number.parseInt(city.infected)],
-            ['Привитые люди', Number.parseInt(city.vacinated)]
+            ['Обычные люди', city.population - city.infected - city.vacinated],
+            ['Зараженные люди', city.infected],
+            ['Привитые люди', city.vacinated]
         ]);
         tables.push(table);
     }

@@ -156,7 +156,7 @@ function simulationStep() {
       getIll = 0;
       temp = 0;
       let t = weeks < 13 || weeks > 32 ? 0.9 : 0.1;
-      let e = Math.random(0,objModel.cities[i].sSaturation*t*objModel.cities[i].infected/objModel.cities[i].population/100);
+      let e = Math.random(0,objModel.cities[i].tSaturation*t*objModel.cities[i].infected/objModel.cities[i].population/100);
       console.log(e);
       objModel.fund+=Math.trunc((objModel.cities[i].population-objModel.cities[i].infected)*objModel.tax*0.65);
       objModel.fund-=Math.trunc(objModel.cities[i].infected*objModel.cashPatient*0.65);
@@ -175,7 +175,7 @@ function simulationStep() {
       getIll +=temp;
       objModel.cities[i].immune3-=temp;
       console.log(getIll);
-      getIll += (objModel.cities[i].population - objModel.cities[i].infected - objModel.cities[i].vacinated - objModel.cities[i].immune1 - objModel.cities[i].immune2 - objModel.cities[i].immune3 - getIll)*e;
+      getIll += Math.trunc((objModel.cities[i].population - objModel.cities[i].infected - objModel.cities[i].vacinated - objModel.cities[i].immune1 - objModel.cities[i].immune2 - objModel.cities[i].immune3 - getIll)*e);
       console.log(getIll);
       objModel.cities[i].cure1 = objModel.cities[i].cure2;
       objModel.cities[i].cure2 = objModel.cities[i].cure3;

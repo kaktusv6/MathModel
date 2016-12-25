@@ -5,6 +5,11 @@ google.charts.load('current', {'packages':['corechart']});
 
 google.charts.setOnLoadCallback(drawChart);
 
+//инициализация глобальных переменных, используемых по ходу работы модели
+var year = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+var countdown = objModel.period*4;
+var weeks = year.indexOf(objModel.startMonth)*4 + 1;
+
 // метод который рисует диаграммы
 // запускается когда сайт полностью прогрузился
 function drawChart() {
@@ -13,7 +18,7 @@ function drawChart() {
 
     for (let city of objModel.cities) {
         var table = new google.visualization.DataTable();
-        
+
         table.addColumn('string', 'Тип лбдей');
         table.addColumn('number', 'Кол-во');
         table.addRows([
@@ -23,7 +28,7 @@ function drawChart() {
         ]);
         tables.push(table);
     }
-    
+
     var sizeChart = 180;
     var options = {
             legend: 'none',
@@ -58,7 +63,7 @@ function updateCharts() {
 
     for (let city of objModel.cities) {
         var table = new google.visualization.DataTable();
-        
+
         table.addColumn('string', 'Тип лбдей');
         table.addColumn('number', 'Кол-во');
         table.addRows([
@@ -68,7 +73,7 @@ function updateCharts() {
         ]);
         tables.push(table);
     }
-    
+
     var sizeChart = 180;
     var options = {
             legend: 'none',
@@ -85,7 +90,38 @@ function updateCharts() {
     }
     $('.fund').html(objModel.fund);
 }
+//функция, которая вызывается при попытке провести вакцинацию в каком-либо городе
+function vaccinate() {
 
+}
+//функция, описывающая переход на следующий шаг симуляции
+function simulationStep() {
+  weeks++;
+  if (weeks > 48)
+  {
+    weeks = 1;
+  }
+  let answer;
+  if (weeks % 4 == 0)
+  {
+    cweek = 4
+  }
+  else
+  {
+    cweek = weeks % 4;
+  }
+  if (weeks % 4 == 0)
+  {
+    cmonth = Math.trunc((weeks - 1) / 4) + 1;
+  }
+  else
+  {
+    cmonth = Math.trunc(weeks / 4) + 1;
+  }
+  for (var i = 0; i < objModel.cities.length; i++) {
+    objModel.cities[i];
+  }
+}
 // запрос на данные из json файла
 // в любом случае выполняется в конце
 $.getJSON('php/cities.json', function(data) {

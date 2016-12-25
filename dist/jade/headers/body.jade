@@ -28,6 +28,12 @@
 			label(for="price-input") Стоимость одной прививки
 			input(type="text" placeholder="в у.е." name="price").form-control.input-model#price-input
 		.form-group.col-md-12.input-form
-			label(for="fund-input") Денежный фонд страны на прививки
+			label(for="fund-input") Денежный фонд страны
 			input(type="text" placeholder="в у.е." name="fund").form-control.input-model#fund-input
+		.form-group.col-md-12.input-form
+			label(for="tax-input") Налог с жителя
+			input(type="text" placeholder="в у.е." name="tax").form-control.input-model#tax-input
+		.form-group.col-md-12.input-form
+			label(for="cashPatient-input") Денежные средства предоставляемые больному
+			input(type="text" placeholder="в у.е." name="cashPatient").form-control.input-model#cashPatient-input
 		button(type="submit").btn.btn-success.col-md-2.col-md-offset-5.but-submit Ввод

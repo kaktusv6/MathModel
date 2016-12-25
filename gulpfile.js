@@ -8,8 +8,8 @@ var gulp = require('gulp'),
 gulp.task('connect', function() {
 	connect.server({
 		base: '.',
-		hostname: 'localhost'
-		//port: 8080
+		hostname: 'localhost',
+		port: 8080
 	});
 });
 

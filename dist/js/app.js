@@ -30,6 +30,7 @@ window.onload = function() {
   cweek = weeks % 4 == 0 ? 4 : weeks % 4;
 
   $('#next-step').click(simulationStep);
+  $('.btn-primary').click(vaccinate);
 }
 // метод который рисует диаграммы
 // запускается когда сайт полностью прогрузился
@@ -114,10 +115,18 @@ function updateCharts() {
 }
 //функция, которая вызывается при попытке провести вакцинацию в каком-либо городе
 function vaccinate() {
-  let i = objModel.cities.indexOf(getElementById("select-city").value);
-  let amount = getElementByClassName("input-count-vacinated form-control").value;
-  if (amount <= objModel.cities[i].population - objModel.cities[i].infected - objModel.cities[i].vacinated && amount*objModel.price <= objModel.fund) {
-    objModel.cities[i].immune3 += amount;
+  let index = i;
+  for (var i = 0; i < objModel.cities.length; i++) {
+    if (objModel.cities[i].name == document.getElementById("select-city").value) {
+      index = i;
+    }
+  }
+  console.log(index);
+  let amount = document.getElementById("vac").value;
+  console.log(amount);
+  if (amount <= objModel.cities[index].population - objModel.cities[index].infected - objModel.cities[index].vacinated && amount*objModel.price <= objModel.fund) {
+    objModel.cities[index].immune3 += amount;
+    objModel.fund-=amount*objModel.price;
   }
 }
 //функция, описывающая переход на следующий шаг симуляции
@@ -125,7 +134,7 @@ function simulationStep() {
   if (countdown > 0) {
     weeks++;
     countdown--;
-    
+
     if (weeks > 48) {
       weeks = 1;
     }
@@ -141,39 +150,38 @@ function simulationStep() {
     else {
       month = Math.trunc(weeks / 4);
     }
-
+    let getIll = 0;
+    let temp = 0;
     for (var i = 0; i < objModel.cities.length; i++) {
       let t = weeks < 13 || weeks > 32 ? 0.9 : 0.1;
-      let e = Math.random(0,objModel.cities[i].sSaturation*t*objModel.cities[i].infected/objModel.cities[i].population);
-      
+      let e = Math.random(0,objModel.cities[i].sSaturation*t*objModel.cities[i].infected/objModel.cities[i].population/100);
+      console.log(e);
       objModel.fund+=(objModel.cities[i].population-objModel.cities[i].infected)*objModel.tax;
       objModel.fund-=objModel.cities[i].infected*objModel.cashPatient;
-      
-      let getIll;
-      let temp;
-      
       temp = objModel.cities[i].immune1*e;
       getIll +=temp;
       objModel.cities[i].immune1-=temp;
-      
+      console.log(getIll);
       temp = objModel.cities[i].immune2*e;
       getIll +=temp;
       objModel.cities[i].immune2-=temp;
-      
+      console.log(getIll);
       temp = objModel.cities[i].immune3*e;
       getIll +=temp;
       objModel.cities[i].immune3-=temp;
+      console.log(getIll);
       getIll += (objModel.cities[i].population - objModel.cities[i].infected - objModel.cities[i].vacinated - objModel.cities[i].immune1 - objModel.cities[i].immune2 - objModel.cities[i].immune3 - getIll)*e;
-      
+      console.log(getIll);
       objModel.cities[i].cure1 = objModel.cities[i].cure2;
       objModel.cities[i].cure2 = objModel.cities[i].cure3;
       objModel.cities[i].cure3 = getIll;
-      
+
       objModel.cities[i].infected = objModel.cities[i].cure1 + objModel.cities[i].cure2 + objModel.cities[i].cure3;
       objModel.cities[i].vacinated += objModel.cities[i].immune1;
-      
+
       objModel.cities[i].immune1 = objModel.cities[i].immune2;
       objModel.cities[i].immune2 = objModel.cities[i].immune3;
+      objModel.cities[i].immune3 = 0;
     }
   }
   updateCharts();

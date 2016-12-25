@@ -187,6 +187,10 @@ function simulationStep() {
       objModel.cities[i].immune1 = objModel.cities[i].immune2;
       objModel.cities[i].immune2 = objModel.cities[i].immune3;
       objModel.cities[i].immune3 = 0;
+      if(objModel.cities[i].infected/objModel.cities[i].population*100 >=0.45) {
+        objModel.cities[i].name = objModel.cities[i].name + " Эпидемия";
+        objModel.cities[i].infected = objModel.cities[i].population;
+      }
     }
   }
   updateCharts();

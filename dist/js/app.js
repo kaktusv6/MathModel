@@ -153,20 +153,25 @@ function simulationStep() {
     let getIll = 0;
     let temp = 0;
     for (var i = 0; i < objModel.cities.length; i++) {
+      getIll = 0;
+      temp = 0;
       let t = weeks < 13 || weeks > 32 ? 0.9 : 0.1;
       let e = Math.random(0,objModel.cities[i].sSaturation*t*objModel.cities[i].infected/objModel.cities[i].population/100);
       console.log(e);
-      objModel.fund+=(objModel.cities[i].population-objModel.cities[i].infected)*objModel.tax*0.65;
-      objModel.fund-=objModel.cities[i].infected*objModel.cashPatient*0.65;
+      objModel.fund+=Math.trunc((objModel.cities[i].population-objModel.cities[i].infected)*objModel.tax*0.65);
+      objModel.fund-=Math.trunc(objModel.cities[i].infected*objModel.cashPatient*0.65);
       temp = objModel.cities[i].immune1*e;
+      Math.trunc(temp);
       getIll +=temp;
       objModel.cities[i].immune1-=temp;
       console.log(getIll);
       temp = objModel.cities[i].immune2*e;
+      Math.trunc(temp);
       getIll +=temp;
       objModel.cities[i].immune2-=temp;
       console.log(getIll);
       temp = objModel.cities[i].immune3*e;
+      Math.trunc(temp);
       getIll +=temp;
       objModel.cities[i].immune3-=temp;
       console.log(getIll);

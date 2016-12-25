@@ -190,6 +190,7 @@ function simulationStep() {
       if(objModel.cities[i].infected/objModel.cities[i].population*100 >=0.45) {
         objModel.cities[i].name = objModel.cities[i].name + " Эпидемия";
         objModel.cities[i].infected = objModel.cities[i].population;
+        objModel.cities[i].vacinated = 0;
       }
     }
   }

@@ -125,9 +125,19 @@ function vaccinate() {
   let amount = document.getElementById("vac").value*1;
   console.log(amount);
   if (amount <= objModel.cities[index].population - objModel.cities[index].infected - objModel.cities[index].vacinated - objModel.cities[index].immune1 - objModel.cities[index].immune2 - objModel.cities[index].immune3 && amount*objModel.price <= objModel.fund) {
-    objModel.cities[index].immune3 += amount;
+    objModel.cities[index].immune3 += Math.trunc(amount);
     objModel.fund-=amount*objModel.price;
   }
+}
+
+function getTypeCity (type) {
+  if (type === 'Мегаполис') {
+    return 0.9;
+  }
+  if (type == 'Средний город') {
+    return 0.7;
+  }
+  return 0.4;
 }
 //функция, описывающая переход на следующий шаг симуляции
 function simulationStep() {
@@ -156,11 +166,21 @@ function simulationStep() {
     for (var i = 0; i < objModel.cities.length; i++) {
       getIll = 0;
       temp = 0;
-      // let e = objModel.cities[i].tSaturation/100*t*objModel.cities[i].infected/objModel.cities[i].population;
-      let e = objModel.cities[i].tSaturation/100*t*objModel.cities[i].infected/objModel.cities[i].population;
+      
+      let potentialInfected = (objModel.cities[i].population - objModel.cities[i].infected - objModel.cities[i].vacinated)/objModel.cities[i].population;
+      let infected = objModel.cities[i].infected/objModel.cities[i].population;
+      let vacinated = objModel.cities[i].vacinated/objModel.cities[i].population;
+      
+      // let e = objModel.cities[i].tSaturation/100*t*objModel.cities[i].infected/objModel.cities[i].population; // изначальная функция
+      
+      let e = Math.exp(
+        -(
+          potentialInfected * objModel.cities[i].tSaturation/100 * t * infected * getTypeCity(objModel.cities[i].typePopulation) / vacinated
+        )
+      );
       console.log(e);
-      // e = Math.random() * (1 - e) + e;
-      // console.log(e);
+      e = chance.floating({min: 0, max: e});
+      console.log(e);
 
       objModel.fund+=Math.trunc((objModel.cities[i].population-objModel.cities[i].infected)*objModel.tax*0.65);
       objModel.fund-=Math.trunc(objModel.cities[i].infected*objModel.cashPatient*0.65);

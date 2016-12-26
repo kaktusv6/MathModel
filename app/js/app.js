@@ -18,7 +18,7 @@ var weeks;
 var cweek;
 
 window.onload = function() {
-  console.log(objModel.cities);
+  // console.log(objModel.cities);
   for (var i = 0; i < objModel.cities.length; i++) {
     objModel.cities[i].cure3 = objModel.cities[i].infected;
   }
@@ -117,12 +117,12 @@ function updateCharts() {
 function vaccinate() {
   let index = i;
   for (var i = 0; i < objModel.cities.length; i++) {
-    if (objModel.cities[i].name == document.getElementById("select-city").value) {
+    if (objModel.cities[i].name === document.getElementById("select-city").value) {
       index = i;
     }
   }
-  console.log(index);
-  let amount = document.getElementById("vac").value;
+  // console.log(index);
+  let amount = document.getElementById("vac").value*1;
   console.log(amount);
   if (amount <= objModel.cities[index].population - objModel.cities[index].infected - objModel.cities[index].vacinated && amount*objModel.price <= objModel.fund) {
     objModel.cities[index].immune3 += amount;
@@ -152,29 +152,39 @@ function simulationStep() {
     }
     let getIll = 0;
     let temp = 0;
+    let t = weeks < 13 || weeks > 32 ? 0.9 : 0.1;
     for (var i = 0; i < objModel.cities.length; i++) {
-      let t = weeks < 13 || weeks > 32 ? 0.9 : 0.1;
-      let e = Math.random(0,objModel.cities[i].sSaturation*t*objModel.cities[i].infected/objModel.cities[i].population/100);
+      getIll = 0;
+      temp = 0;
+      // let e = objModel.cities[i].tSaturation/100*t*objModel.cities[i].infected/objModel.cities[i].population;
+      let e = objModel.cities[i].tSaturation/100*t*objModel.cities[i].infected/objModel.cities[i].population;
       console.log(e);
-      objModel.fund+=(objModel.cities[i].population-objModel.cities[i].infected)*objModel.tax;
-      objModel.fund-=objModel.cities[i].infected*objModel.cashPatient;
+      // e = Math.random() * (1 - e) + e;
+      // console.log(e);
+
+      objModel.fund+=Math.trunc((objModel.cities[i].population-objModel.cities[i].infected)*objModel.tax*0.65);
+      objModel.fund-=Math.trunc(objModel.cities[i].infected*objModel.cashPatient*0.65);
+
       temp = objModel.cities[i].immune1*e;
+      Math.trunc(temp);
       getIll +=temp;
       objModel.cities[i].immune1-=temp;
-      console.log(getIll);
+      // console.log(getIll);
       temp = objModel.cities[i].immune2*e;
+      Math.trunc(temp);
       getIll +=temp;
       objModel.cities[i].immune2-=temp;
-      console.log(getIll);
+      // console.log(getIll);
       temp = objModel.cities[i].immune3*e;
+      Math.trunc(temp);
       getIll +=temp;
       objModel.cities[i].immune3-=temp;
-      console.log(getIll);
-      getIll += (objModel.cities[i].population - objModel.cities[i].infected - objModel.cities[i].vacinated - objModel.cities[i].immune1 - objModel.cities[i].immune2 - objModel.cities[i].immune3 - getIll)*e;
-      console.log(getIll);
-      objModel.cities[i].cure1 = objModel.cities[i].cure2;
-      objModel.cities[i].cure2 = objModel.cities[i].cure3;
-      objModel.cities[i].cure3 = getIll;
+      // console.log(getIll);
+      getIll += Math.trunc((objModel.cities[i].population - objModel.cities[i].infected - objModel.cities[i].vacinated - objModel.cities[i].immune1 - objModel.cities[i].immune2 - objModel.cities[i].immune3 - getIll)*e);
+      // console.log(getIll);
+      // objModel.cities[i].cure1 = objModel.cities[i].cure2;
+      // objModel.cities[i].cure2 = objModel.cities[i].cure3;
+      // objModel.cities[i].cure3 = getIll;
 
       objModel.cities[i].infected = objModel.cities[i].cure1 + objModel.cities[i].cure2 + objModel.cities[i].cure3;
       objModel.cities[i].vacinated += objModel.cities[i].immune1;
@@ -182,6 +192,11 @@ function simulationStep() {
       objModel.cities[i].immune1 = objModel.cities[i].immune2;
       objModel.cities[i].immune2 = objModel.cities[i].immune3;
       objModel.cities[i].immune3 = 0;
+      // if(objModel.cities[i].infected/objModel.cities[i].population*100 >=0.45) {
+      //   objModel.cities[i].name = objModel.cities[i].name + " Эпидемия";
+      //   objModel.cities[i].infected = objModel.cities[i].population;
+      //   objModel.cities[i].vacinated = 0;
+      // }
     }
   }
   updateCharts();

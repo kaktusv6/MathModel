@@ -74,7 +74,7 @@ function drawChart() {
     }
 
     $('.fund').html(objModel.fund);
-    $('.month').html(objModel.startMonth);
+    $('#mounth').html(objModel.startMonth);
 }
 
 // метод для перерисовки диаграм

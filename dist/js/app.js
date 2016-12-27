@@ -124,7 +124,7 @@ function vaccinate() {
   }
   // console.log(index);
   let amount = document.getElementById("vac").value*1;
-  
+
   if (amount <= objModel.cities[index].population - objModel.cities[index].infected - objModel.cities[index].vacinated - objModel.cities[index].immune1 - objModel.cities[index].immune2 - objModel.cities[index].immune3 && amount*objModel.price <= objModel.fund) {
     console.log(amount);
     objModel.cities[index].immune3 += Math.trunc(amount);
@@ -168,55 +168,58 @@ function simulationStep() {
     let temp = 0;
     let t = weeks < 13 || weeks > 32 ? 0.9 : 0.1;
     for (var i = 0; i < objModel.cities.length; i++) {
-      getIll = 0;
-      temp = 0;
+      if (!(objModel.cities[i].population == 1 && objModel.cities[i].infected == 1)) {
+        getIll = 0;
+        temp = 0;
 
-      let potentialInfected = (objModel.cities[i].population - objModel.cities[i].infected - objModel.cities[i].vacinated)/objModel.cities[i].population;
-      let infected = objModel.cities[i].infected/objModel.cities[i].population;
-      let vacinated = objModel.cities[i].vacinated/objModel.cities[i].population;
+        let potentialInfected = (objModel.cities[i].population - objModel.cities[i].infected - objModel.cities[i].vacinated)/objModel.cities[i].population;
+        let infected = objModel.cities[i].infected/objModel.cities[i].population;
+        let vacinated = objModel.cities[i].vacinated/objModel.cities[i].population;
 
-      // let e = objModel.cities[i].tSaturation/100*t*objModel.cities[i].infected/objModel.cities[i].population; // изначальная функция
+        // let e = objModel.cities[i].tSaturation/100*t*objModel.cities[i].infected/objModel.cities[i].population; // изначальная функция
 
-      let e = Math.exp(
-        -(
-          potentialInfected * objModel.cities[i].tSaturation/100 * t * infected * getTypeCity(objModel.cities[i].typePopulation) / vacinated
-        )
-      );
-      console.log('[0, ' + e + ']');
-      e = chance.floating({min: 0, max: e});
-      console.log('ksi =' + e);
+        let e = Math.exp(
+          -(
+            potentialInfected * objModel.cities[i].tSaturation/100 * t * infected * getTypeCity(objModel.cities[i].typePopulation) / vacinated
+          )
+        );
+        console.log('[0, ' + e + ']');
+        e = chance.floating({min: 0, max: e});
+        console.log('ksi =' + e);
 
-      objModel.fund+=Math.trunc((objModel.cities[i].population-objModel.cities[i].infected)*objModel.tax*0.65);
-      objModel.fund-=Math.trunc(objModel.cities[i].infected*objModel.cashPatient*0.65);
-      $('.fund').html(objModel.fund);
-      temp = Math.trunc(objModel.cities[i].immune1*e);
-      getIll +=temp;
-      objModel.cities[i].immune1-=temp;
-      
-      temp = Math.trunc(objModel.cities[i].immune2*e);
-      getIll +=temp;
-      objModel.cities[i].immune2-=temp;
-      
-      temp = Math.trunc(objModel.cities[i].immune3*e);
-      getIll +=temp;
-      objModel.cities[i].immune3-=temp;
-      
-      getIll += Math.trunc((objModel.cities[i].population - objModel.cities[i].infected - objModel.cities[i].vacinated - objModel.cities[i].immune1 - objModel.cities[i].immune2 - objModel.cities[i].immune3 - getIll)*e);
-      
-       objModel.cities[i].cure1 = objModel.cities[i].cure2 + Math.trunc(getIll / 100 * 25);
-       objModel.cities[i].cure2 = objModel.cities[i].cure3 + Math.trunc(getIll / 100 * 60);
-       objModel.cities[i].cure3 = Math.trunc(getIll / 100 * 15);
+        objModel.fund+=Math.trunc((objModel.cities[i].population-objModel.cities[i].infected)*objModel.tax*0.65);
+        objModel.fund-=Math.trunc(objModel.cities[i].infected*objModel.cashPatient*0.65);
+        $('.fund').html(objModel.fund);
+        temp = Math.trunc(objModel.cities[i].immune1*e);
+        getIll +=temp;
+        objModel.cities[i].immune1-=temp;
 
-      objModel.cities[i].infected = objModel.cities[i].cure1 + objModel.cities[i].cure2 + objModel.cities[i].cure3;
-      objModel.cities[i].vacinated += objModel.cities[i].immune1;
+        temp = Math.trunc(objModel.cities[i].immune2*e);
+        getIll +=temp;
+        objModel.cities[i].immune2-=temp;
 
-      objModel.cities[i].immune1 = objModel.cities[i].immune2;
-      objModel.cities[i].immune2 = objModel.cities[i].immune3;
-      objModel.cities[i].immune3 = 0;
-      if(objModel.cities[i].infected/objModel.cities[i].population*100 >=0.45) {
-        objModel.cities[i].name = objModel.cities[i].name + " Эпидемия";
-        objModel.cities[i].infected = objModel.cities[i].population;
-        objModel.cities[i].vacinated = 0;
+        temp = Math.trunc(objModel.cities[i].immune3*e);
+        getIll +=temp;
+        objModel.cities[i].immune3-=temp;
+
+        getIll += Math.trunc((objModel.cities[i].population - objModel.cities[i].infected - objModel.cities[i].vacinated - objModel.cities[i].immune1 - objModel.cities[i].immune2 - objModel.cities[i].immune3 - getIll)*e);
+
+         objModel.cities[i].cure1 = objModel.cities[i].cure2 + Math.trunc(getIll / 100 * 25);
+         objModel.cities[i].cure2 = objModel.cities[i].cure3 + Math.trunc(getIll / 100 * 60);
+         objModel.cities[i].cure3 = Math.trunc(getIll / 100 * 15);
+
+        objModel.cities[i].infected = objModel.cities[i].cure1 + objModel.cities[i].cure2 + objModel.cities[i].cure3;
+        objModel.cities[i].vacinated += objModel.cities[i].immune1;
+
+        objModel.cities[i].immune1 = objModel.cities[i].immune2;
+        objModel.cities[i].immune2 = objModel.cities[i].immune3;
+        objModel.cities[i].immune3 = 0;
+        if(objModel.cities[i].infected/objModel.cities[i].population*100 >=0.45) {
+          objModel.cities[i].name = objModel.cities[i].name + " Эпидемия";
+          objModel.cities[i].infected = 1;
+          objModel.cities[i].population = 1;
+          objModel.cities[i].vacinated = 0;
+        }
       }
     }
   }

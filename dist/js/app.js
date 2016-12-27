@@ -125,7 +125,7 @@ function vaccinate() {
   // console.log(index);
   let amount = document.getElementById("vac").value*1;
 
-  if (amount <= objModel.cities[index].population - objModel.cities[index].infected - objModel.cities[index].vacinated - objModel.cities[index].immune1 - objModel.cities[index].immune2 - objModel.cities[index].immune3 && amount*objModel.price <= objModel.fund) {
+  if (amount <= (objModel.cities[index].population - objModel.cities[index].infected - objModel.cities[index].vacinated - objModel.cities[index].immune1 - objModel.cities[index].immune2 - objModel.cities[index].immune3) && amount*objModel.price <= objModel.fund) {
     console.log(amount);
     objModel.cities[index].immune3 += Math.trunc(amount);
     objModel.fund-=amount*objModel.price;
@@ -214,7 +214,7 @@ function simulationStep() {
         objModel.cities[i].immune1 = objModel.cities[i].immune2;
         objModel.cities[i].immune2 = objModel.cities[i].immune3;
         objModel.cities[i].immune3 = 0;
-        if(objModel.cities[i].infected/objModel.cities[i].population*100 >=0.45) {
+        if(objModel.cities[i].infected/objModel.cities[i].population > 0.45) {
           objModel.cities[i].name = objModel.cities[i].name + " Эпидемия";
           objModel.cities[i].infected = 1;
           objModel.cities[i].population = 1;

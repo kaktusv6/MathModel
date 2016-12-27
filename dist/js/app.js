@@ -124,8 +124,9 @@ function vaccinate() {
   }
   // console.log(index);
   let amount = document.getElementById("vac").value*1;
-  console.log(amount);
+  
   if (amount <= objModel.cities[index].population - objModel.cities[index].infected - objModel.cities[index].vacinated - objModel.cities[index].immune1 - objModel.cities[index].immune2 - objModel.cities[index].immune3 && amount*objModel.price <= objModel.fund) {
+    console.log(amount);
     objModel.cities[index].immune3 += Math.trunc(amount);
     objModel.fund-=amount*objModel.price;
     $('.fund').html(objModel.fund);
@@ -181,9 +182,9 @@ function simulationStep() {
           potentialInfected * objModel.cities[i].tSaturation/100 * t * infected * getTypeCity(objModel.cities[i].typePopulation) / vacinated
         )
       );
-      console.log(e);
+      console.log('[0, ' + e + ']');
       e = chance.floating({min: 0, max: e});
-      console.log(e);
+      console.log('ksi =' + e);
 
       objModel.fund+=Math.trunc((objModel.cities[i].population-objModel.cities[i].infected)*objModel.tax*0.65);
       objModel.fund-=Math.trunc(objModel.cities[i].infected*objModel.cashPatient*0.65);
@@ -191,17 +192,17 @@ function simulationStep() {
       temp = Math.trunc(objModel.cities[i].immune1*e);
       getIll +=temp;
       objModel.cities[i].immune1-=temp;
-      console.log(getIll);
+      
       temp = Math.trunc(objModel.cities[i].immune2*e);
       getIll +=temp;
       objModel.cities[i].immune2-=temp;
-      console.log(getIll);
+      
       temp = Math.trunc(objModel.cities[i].immune3*e);
       getIll +=temp;
       objModel.cities[i].immune3-=temp;
-      console.log(getIll);
+      
       getIll += Math.trunc((objModel.cities[i].population - objModel.cities[i].infected - objModel.cities[i].vacinated - objModel.cities[i].immune1 - objModel.cities[i].immune2 - objModel.cities[i].immune3 - getIll)*e);
-      console.log(getIll);
+      
        objModel.cities[i].cure1 = objModel.cities[i].cure2 + Math.trunc(getIll / 100 * 25);
        objModel.cities[i].cure2 = objModel.cities[i].cure3 + Math.trunc(getIll / 100 * 60);
        objModel.cities[i].cure3 = Math.trunc(getIll / 100 * 15);
@@ -212,11 +213,11 @@ function simulationStep() {
       objModel.cities[i].immune1 = objModel.cities[i].immune2;
       objModel.cities[i].immune2 = objModel.cities[i].immune3;
       objModel.cities[i].immune3 = 0;
-      // if(objModel.cities[i].infected/objModel.cities[i].population*100 >=0.45) {
-      //   objModel.cities[i].name = objModel.cities[i].name + " Эпидемия";
-      //   objModel.cities[i].infected = objModel.cities[i].population;
-      //   objModel.cities[i].vacinated = 0;
-      // }
+      if(objModel.cities[i].infected/objModel.cities[i].population*100 >=0.45) {
+        objModel.cities[i].name = objModel.cities[i].name + " Эпидемия";
+        objModel.cities[i].infected = objModel.cities[i].population;
+        objModel.cities[i].vacinated = 0;
+      }
     }
   }
   updateCharts();

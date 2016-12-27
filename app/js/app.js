@@ -187,7 +187,7 @@ function simulationStep() {
 
       objModel.fund+=Math.trunc((objModel.cities[i].population-objModel.cities[i].infected)*objModel.tax*0.65);
       objModel.fund-=Math.trunc(objModel.cities[i].infected*objModel.cashPatient*0.65);
-
+      $('.fund').html(objModel.fund);
       temp = Math.trunc(objModel.cities[i].immune1*e);
       getIll +=temp;
       objModel.cities[i].immune1-=temp;
